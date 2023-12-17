@@ -4,7 +4,7 @@ use std::io::Write;
 
 fn main() {
     let f = File::open("../values.txt").expect("couldn't find input file");
-    let mut new_f = File::create("../output.txt").expect("couldn't find input file");
+    let mut new_f = File::create("../output.txt").expect("couldn't find output file");
     let buffer = std::io::BufReader::new(f).lines();
     let mut next_rank = 2;
 
