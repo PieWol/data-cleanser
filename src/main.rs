@@ -16,7 +16,7 @@ fn main() {
             println!("{}", pre);
             println!("{}", suf);
             // fix the rank
-            let v: Vec<&str> = suf.splitn(3, ",").collect();
+            let v: Vec<&str> = suf.splitn(3, ',').collect();
             // get the rank substring
             let mut rank = v.get(1).unwrap().to_string();
             println!("{}", rank);
@@ -25,11 +25,11 @@ fn main() {
             }
             next_rank += 1;
 
-            rank = rank.replace(".", "");
-            rank = rank.replace(" ", "");
-            let rank = format!("{}{}{}", ",", rank, ",");
+            rank = rank.replace('.', "");
+            rank = rank.replace(' ', "");
+            let rank = format!(",{},", rank);
             println!("{}", rank);
-            let suf = format!("{}{}{}", v.get(0).unwrap(), rank, v.get(2).unwrap());
+            let suf = format!("{}{}{}", v.first().unwrap(), rank, v.get(2).unwrap());
 
             let output = format!("{}{}{}", pre.to_owned(), "values", suf);
 
