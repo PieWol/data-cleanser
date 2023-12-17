@@ -1,15 +1,16 @@
 use std::fs::File;
 use std::io::BufRead;
 use std::io::Write;
+use std::time::Instant;
 
 fn main() {
+    let start = Instant::now();
     let f = File::open("../values.txt").expect("couldn't find input file");
     let mut new_f = File::create("../output.txt").expect("couldn't find output file");
     let buffer = std::io::BufReader::new(f).lines();
     let mut next_rank = 2;
-
-    buffer.for_each(|l| match l {
-        Ok(s) => {
+    buffer.for_each(|l| {
+        if let Ok(s) = l {
             let mut values = s.split("values");
             let pre = values.next().unwrap();
             let suf = values.next().unwrap();
@@ -36,8 +37,11 @@ fn main() {
             // write into output file
             writeln!(new_f, "{}", output).expect("write failed");
         }
-        Err(_) => {}
     });
 
     println!("done cleaning");
+    let duration = start.elapsed();
+
+    // Laufzeit ausgeben
+    println!("Laufzeit: {:?}", duration);
 }
